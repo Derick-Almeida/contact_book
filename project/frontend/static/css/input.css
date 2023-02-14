@@ -19,9 +19,13 @@
 .inputBox span {
     position: absolute;
     left: 0;
+    width: 100%;
+    text-align: left;
+
     padding: 1.2rem 0.3rem 0.4rem 0.3rem;
     font-size: 1.2rem;
     pointer-events: none;
+
     transition: 0.3s;
 }
 
@@ -48,6 +52,6 @@
 
 .inputBox input:valid~span,
 .inputBox input:focus~span {
-    transform: translate(-0.6rem, -1.5rem) scale(0.8);
+    transform: translate(-1.7rem, -1.5rem) scale(0.8);
     color: var(--orange);
 }
