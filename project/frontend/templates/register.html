@@ -1,15 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
+    <link rel="stylesheet" href="../static/css/global_style.css">
+    <link rel="stylesheet" href="../static/css/animations.css">
+    <link rel="stylesheet" href="../static/css/input.css">
+    <link rel="stylesheet" href="../static/css/login-register.css">
+    <title>Cadastro</title>
 </head>
 
 <body>
-    <h1>olá mundo</h1>
+    <main>
+        <form action="" method="POST" enctype="multipart/form-data" style="animation: slideLeft 0.8s linear;">
+            <h1>Cadastro</h1>
+
+            <div class="inputBox">
+                <input type="text" required>
+                <span>Nome</span>
+            </div>
+
+            <div class="inputBox">
+                <input type="email" required>
+                <span>Email</span>
+            </div>
+
+            <div class="inputBox">
+                <input type="text" required>
+                <span>Telefone</span>
+            </div>
+
+            <div class="inputBox">
+                <input type="password" required>
+                <span>Senha</span>
+            </div>
+
+            <div class="inputBox">
+                <input type="password" required>
+                <span>Confirmação da senha</span>
+            </div>
+
+            <button>Entrar</button>
+            <span>Já tem uma conta? <a href="/login">Faça Login</a></span>
+        </form>
+    </main>
+    <aside>
+        <img src="../static/img/register.gif" alt="">
+    </aside>
 </body>
 
 </html>

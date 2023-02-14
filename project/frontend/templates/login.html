@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/global_style.css">
-    <link rel="stylesheet" href="../static/css/login.css">
-    <link rel="stylesheet" href="../static/css/components/input.css">
+    <link rel="stylesheet" href="../static/css/animations.css">
+    <link rel="stylesheet" href="../static/css/input.css">
+    <link rel="stylesheet" href="../static/css/login-register.css">
     <title>Login</title>
 </head>
 
@@ -16,7 +17,7 @@
         <img src="../static/img/login.gif" alt="">
     </aside>
     <main>
-        <form action="">
+        <form action="" method="POST" enctype="multipart/form-data" style="animation: slideRight 0.8s linear;">
             <h1>Login</h1>
 
             <div class="inputBox">
@@ -26,7 +27,7 @@
 
             <div class="inputBox">
                 <input type="password" required>
-                <span>Password</span>
+                <span>Senha</span>
             </div>
 
             <button>Entrar</button>

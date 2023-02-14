@@ -38,24 +38,9 @@ main form {
     background-color: transparent;
     padding: 2rem;
 
-    animation: slideRight 0.8s linear;
     width: 50%;
     height: 100%;
 }
-
-
-@keyframes slideRight {
-    0% {
-        transform: translate(25%);
-        opacity: 0;
-    }
-
-    100% {
-        transform: translate(0);
-        opacity: 1;
-    }
-}
-
 
 form h1 {
     margin-bottom: 1rem;
@@ -67,7 +52,7 @@ form button {
     background-color: var(--black);
     border: 0.1rem solid var(--black);
     color: var(--white);
-    border-radius: 0.2rem;
+    border-radius: 0.5rem;
 
     font-size: 1.5rem;
     padding: 0.3rem;
