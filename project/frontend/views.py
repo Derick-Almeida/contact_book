@@ -2,7 +2,7 @@ from flask import render_template
 
 
 def home():
-    return "home"
+    return render_template("index.html")
 
 
 def login():
