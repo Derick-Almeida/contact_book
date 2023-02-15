@@ -1,5 +1,6 @@
 from flask import Flask
-from project.frontend import routes
+from project.backend import routes as b_rutes
+from project.frontend import routes as f_routes
 
 
 def create_app():
@@ -9,7 +10,8 @@ def create_app():
         static_folder="./project/frontend/static",
     )
 
-    routes.init_app(app)
+    b_rutes.init_app(app)
+    f_routes.init_app(app)
 
     return app
 
