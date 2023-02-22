@@ -2,7 +2,6 @@ from jsonschema import Draft7Validator
 
 schema = {
     "type": "object",
-    "required": ["name", "password", "email", "phone"],
     "properties": {
         "name": {
             "type": "string",
@@ -27,4 +26,11 @@ schema = {
     },
 }
 
-user_validator = Draft7Validator(schema)
+user_validator = Draft7Validator(
+    {
+        **schema,
+        "required": ["name", "password", "email", "phone"],
+    }
+)
+
+user_patch_validator = Draft7Validator(schema)

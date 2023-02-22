@@ -1,20 +1,32 @@
-from project.backend.schemas import user_validator
+from project.backend.schemas import user_validator, user_patch_validator
 
 
 class ValidateFields:
-    def __init__(self, data: dict) -> None:
+    def __init__(self, data: dict, validator=user_validator) -> None:
         self.data = data
+        self.validator = validator
 
     def is_valid(self) -> bool:
-        if user_validator.is_valid(self.data):
+        if self.validator.is_valid(self.data):
             return True
         else:
             return False
 
+    def clean_data(self) -> dict:
+        new_data = dict(**self.data)
+        data_fields = self.data.keys()
+        schema_fields = self.validator.schema["properties"].keys()
+
+        for field in data_fields:
+            if field not in schema_fields:
+                new_data.pop(field)
+
+        return new_data
+
     def errors(self) -> dict:
         errors = {}
 
-        for err in list(user_validator.iter_errors(self.data)):
+        for err in list(self.validator.iter_errors(self.data)):
             if err.validator is "required":
                 fields = err.validator_value
 
@@ -35,3 +47,9 @@ class ValidateFields:
                 ] = f"The field must have a maximum of {err.validator_value} characters"
 
         return errors
+
+
+class ValidateUpdateFields(ValidateFields):
+    def __init__(self, data: dict, validator=user_patch_validator) -> None:
+        self.data = data
+        self.validator = validator

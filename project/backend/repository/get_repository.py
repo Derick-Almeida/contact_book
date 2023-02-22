@@ -34,7 +34,9 @@ class GetRepository:
         return jsonify(query), 200
 
     def update(self, data: dict, id: str) -> dict:
-        query = self.collection.find_one_and_update({"_id": id}, {"$set": data})
+        query = self.collection.find_one_and_update(
+            {"_id": id}, {"$set": data}, return_document=True
+        )
 
         if not bool(query):
             return jsonify({"message": "Not found."}), 404
@@ -48,3 +50,11 @@ class GetRepository:
             return jsonify({"message": "Not found."}), 404
 
         return jsonify(), 204
+
+    def find_one(self, *args) -> dict:
+        query = self.collection.find_one(*args)
+
+        if not bool(query):
+            return False
+
+        return True
