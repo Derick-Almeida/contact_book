@@ -13,7 +13,7 @@ class UserControllers:
         return UserServices.retrieve_user(id)
 
     def update_user(id: str) -> dict:
-        return {"msg": "update"}
+        return UserServices.update_user(id, request.get_json())
 
     def delete_user(id: str) -> None:
         return UserServices.delete_user(id)
