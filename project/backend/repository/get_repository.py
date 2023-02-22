@@ -15,18 +15,36 @@ class GetRepository:
         self.collection = self.db[collection]
 
     def create(self, data: dict) -> dict:
-        ...
+        query = self.collection.insert_one(data)
+        obj = self.collection.find_one({"_id": query.inserted_id})
+
+        return jsonify(obj), 201
 
     def list(self) -> list[dict]:
-        return self.collection.find()
+        query = list(self.collection.find())
+
+        return jsonify(query), 200
 
     def retrieve(self, id: str) -> dict:
-        return self.collection.find_one({"_id": id})
+        query = self.collection.find_one({"_id": id})
+
+        if not bool(query):
+            return jsonify({"message": "Not found."}), 404
+
+        return jsonify(query), 200
 
     def update(self, data: dict, id: str) -> dict:
-        ...
+        query = self.collection.find_one_and_update({"_id": id}, {"$set": data})
+
+        if not bool(query):
+            return jsonify({"message": "Not found."}), 404
+
+        return jsonify(query), 200
 
     def delete(self, id: str) -> None:
-        self.collection.find_one_and_delete({"_id": id})
+        query = self.collection.find_one_and_delete({"_id": id})
 
-        return None
+        if not bool(query):
+            return jsonify({"message": "Not found."}), 404
+
+        return jsonify(), 204
