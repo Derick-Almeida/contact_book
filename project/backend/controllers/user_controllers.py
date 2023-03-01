@@ -1,5 +1,5 @@
 from flask import request
-from project.backend.services import UserServices
+from project.backend.services import UserServices, session
 
 
 class UserControllers:
@@ -17,3 +17,6 @@ class UserControllers:
 
     def delete_user(id: str) -> None:
         return UserServices.delete_user(id)
+
+    def user_login():
+        return session(request.get_json())

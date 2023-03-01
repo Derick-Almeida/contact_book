@@ -2,6 +2,7 @@ from project.backend.repository import GetRepository
 from project.backend.utils import ValidateFields, ValidateUpdateFields, ValidateUnique
 from datetime import datetime
 import uuid
+from passlib.hash import pbkdf2_sha256
 
 
 class UserServices:
@@ -18,21 +19,34 @@ class UserServices:
             if is_unique.phone():
                 return is_unique.phone()
 
+            data["password"] = pbkdf2_sha256.hash(data.get("password"))
+
             data["_id"] = str(uuid.uuid4())
             data["createdAt"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             data["updatedAt"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-            user = GetRepository("users").create(data)
+            user, status = GetRepository("users").create(data)
+            user_data = user.get_json()
+            user_data.pop("password")
 
-            return user
+            return user_data, status
         else:
             return check.errors()
 
     def list_users() -> list[dict]:
-        return GetRepository("users").list()
+        user_list, status = GetRepository("users").list()
+        formated_list = user_list.get_json()
+        for user in formated_list:
+            user.pop("password")
 
-    def retrieve_user(id: str) -> list[dict]:
-        return GetRepository("users").retrieve(id)
+        return formated_list, status
+
+    def retrieve_user(id: str) -> dict:
+        user, status = GetRepository("users").retrieve(id)
+        user_data = user.get_json()
+        user_data.pop("password")
+
+        return user_data, status
 
     def update_user(id: str, data: dict) -> dict:
         check = ValidateUpdateFields(data)
@@ -49,11 +63,16 @@ class UserServices:
                 if is_unique.phone():
                     return is_unique.phone()
 
+            if data.get("password"):
+                data["password"] = pbkdf2_sha256.hash(data.get("password"))
+
             data["updatedAt"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-            user = GetRepository("users").update(data, id)
+            user, status = GetRepository("users").update(data, id)
+            user_data = user.get_json()
+            user_data.pop("password")
 
-            return user
+            return user_data, status
         else:
             return check.errors()
 

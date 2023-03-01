@@ -51,10 +51,15 @@ class GetRepository:
 
         return jsonify(), 204
 
-    def find_one(self, *args) -> dict:
+    def check_unique(self, *args) -> dict:
         query = self.collection.find_one(*args)
 
         if not bool(query):
             return False
 
         return True
+
+    def find_one(self, *args) -> dict:
+        query = self.collection.find_one(*args)
+
+        return query
