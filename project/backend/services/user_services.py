@@ -33,14 +33,6 @@ class UserServices:
         else:
             return check.errors()
 
-    def list_users() -> list[dict]:
-        user_list, status = GetRepository("users").list()
-        formated_list = user_list.get_json()
-        for user in formated_list:
-            user.pop("password")
-
-        return formated_list, status
-
     def retrieve_user(id: str) -> dict:
         user, status = GetRepository("users").retrieve(id)
         user_data = user.get_json()
