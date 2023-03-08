@@ -29,14 +29,17 @@ class UserServices:
             user_data = user.get_json()
             user_data.pop("password")
 
+            print(status)
+
             return user_data, status
         else:
-            return check.errors()
+            return check.errors(), 400
 
     def retrieve_user(id: str) -> dict:
         user, status = GetRepository("users").retrieve(id)
         user_data = user.get_json()
-        user_data.pop("password")
+        if user_data.get("password"):
+            user_data.pop("password")
 
         return user_data, status
 
@@ -62,7 +65,8 @@ class UserServices:
 
             user, status = GetRepository("users").update(data, id)
             user_data = user.get_json()
-            user_data.pop("password")
+            if user_data.get("password"):
+                user_data.pop("password")
 
             return user_data, status
         else:

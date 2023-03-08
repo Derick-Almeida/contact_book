@@ -10,7 +10,7 @@ schema = {
         },
         "email": {
             "type": "string",
-            "minLength": 10,
+            "minLength": 5,
             "maxLength": 255,
         },
         "phone": {
