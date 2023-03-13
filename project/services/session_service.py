@@ -1,7 +1,7 @@
 from flask import jsonify
 from jwt import encode
 from datetime import datetime, timedelta
-from project.backend.repository import GetRepository
+from project.repository import GetRepository
 from passlib.hash import pbkdf2_sha256
 import os
 
@@ -25,7 +25,7 @@ def session(data: dict) -> dict:
         return jsonify({"message": "Invalid email or password"}), 403
 
     token = encode(
-        payload={**data, "exp": expire_data(24)},
+        payload={"user_id": user["_id"], "exp": expire_data(24)},
         key=os.getenv("SECRET_KEY"),
     )
     return jsonify({"token": token})
