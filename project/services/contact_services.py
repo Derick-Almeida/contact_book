@@ -29,7 +29,7 @@ class ContactServices:
         else:
             return check.errors(), 400
 
-    def list_contact(user_id: str) -> list[dict]:
+    def list_contacts(user_id: str) -> list[dict]:
         all_contacts, status = GetRepository("contacts").list()
         contacts = [
             contact for contact in all_contacts.get_json() if contact["user"] == user_id
