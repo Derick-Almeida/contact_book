@@ -19,19 +19,14 @@ schema = {
             "minLength": 9,
             "maxLength": 15,
         },
-        "password": {
-            "type": "string",
-            "minLength": 6,
-            "maxLength": 255,
-        },
     },
 }
 
-user_validator = Draft7Validator(
+contact_validator = Draft7Validator(
     {
         **schema,
-        "required": ["name", "password", "email", "phone"],
+        "required": ["name", "email", "phone"],
     }
 )
 
-user_patch_validator = Draft7Validator(schema)
+contact_patch_validator = Draft7Validator(schema)

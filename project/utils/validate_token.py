@@ -3,11 +3,10 @@ from jwt import decode, exceptions
 import os
 
 
-def validate_token(token: str, output: bool = False):
+def validate_token(token: str):
     try:
-        if output:
-            return decode(token, key=os.getenv("SECRET_KEY"), algorithms=["HS256"])
-        decode(token, key=os.getenv("SECRET_KEY"), algorithms=["HS256"])
+        decoded = decode(token, key=os.getenv("SECRET_KEY"), algorithms=["HS256"])
+        return (True, decoded)
 
     except exceptions.DecodeError:
         return jsonify({"message": "Invalid Token"}), 401

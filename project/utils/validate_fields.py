@@ -1,8 +1,9 @@
 from project.schemas import user_validator, user_patch_validator
+from jsonschema import Draft7Validator
 
 
 class ValidateFields:
-    def __init__(self, data: dict, validator=user_validator) -> None:
+    def __init__(self, data: dict, validator: Draft7Validator) -> None:
         self.data = data
         self.validator = validator
 
@@ -38,18 +39,22 @@ class ValidateFields:
                 field = err.json_path[2:]
                 errors[
                     field
-                ] = f"The field must contain at least {err.validator_value} characters"
+                ] = f"The field must contain at least {err.validator_value} characters."
 
             if err.validator is "maxLength":
                 field = err.json_path[2:]
                 errors[
                     field
-                ] = f"The field must have a maximum of {err.validator_value} characters"
+                ] = f"The field must have a maximum of {err.validator_value} characters."
+
+            if err.validator is "pattern":
+                field = err.json_path[2:]
+                errors[field] = f"Please use a valid email address."
 
         return errors
 
 
 class ValidateUpdateFields(ValidateFields):
-    def __init__(self, data: dict, validator=user_patch_validator) -> None:
+    def __init__(self, data: dict, validator: Draft7Validator) -> None:
         self.data = data
         self.validator = validator
