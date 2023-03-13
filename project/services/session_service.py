@@ -1,7 +1,7 @@
 from flask import jsonify
 from jwt import encode
 from datetime import datetime, timedelta
-from project.backend.repository import GetRepository
+from project.repository import GetRepository
 from passlib.hash import pbkdf2_sha256
 import os
 

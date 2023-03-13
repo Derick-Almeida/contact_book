@@ -1,4 +1,4 @@
-from project.backend.schemas import user_validator, user_patch_validator
+from project.schemas import user_validator, user_patch_validator
 
 
 class ValidateFields:

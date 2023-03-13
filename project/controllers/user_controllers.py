@@ -1,6 +1,6 @@
 from flask import request
-from project.backend.services import UserServices, session
-from project.backend.utils import verify_token_middleware
+from project.services import UserServices, session
+from project.utils import verify_token_middleware
 
 
 class UserControllers:

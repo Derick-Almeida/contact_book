@@ -1,5 +1,5 @@
 from flask import Flask
-from project.backend.controllers import UserControllers
+from project.controllers import UserControllers
 
 
 def user_routes(app: Flask):

@@ -1,5 +1,5 @@
 from flask import jsonify
-from project.backend.repository import GetRepository
+from project.repository import GetRepository
 
 
 class ValidateUnique:

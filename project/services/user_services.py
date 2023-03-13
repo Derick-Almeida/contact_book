@@ -1,5 +1,5 @@
-from project.backend.repository import GetRepository
-from project.backend.utils import ValidateFields, ValidateUpdateFields, ValidateUnique
+from project.repository import GetRepository
+from project.utils import ValidateFields, ValidateUpdateFields, ValidateUnique
 from datetime import datetime
 import uuid
 from passlib.hash import pbkdf2_sha256
