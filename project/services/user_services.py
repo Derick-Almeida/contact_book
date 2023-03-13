@@ -41,6 +41,15 @@ class UserServices:
         if user_data.get("password"):
             user_data.pop("password")
 
+        all_contacts, _ = GetRepository("contacts").list()
+        contacts = [
+            contact
+            for contact in all_contacts.get_json()
+            if contact["user"] == user_data["_id"]
+        ]
+
+        user_data["contacts"] = contacts
+
         return user_data, status
 
     def update_user(id: str, data: dict) -> dict:
