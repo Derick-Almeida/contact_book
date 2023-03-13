@@ -14,13 +14,13 @@ class ContactController:
 
         return check_token
 
-    def list_contact() -> list[dict]:
+    def list_contacts() -> list[dict]:
         check_token = verify_token_middleware()
 
         if check_token[0] is True:
             user_id = check_token[-1]["user_id"]
 
-            return ContactServices.list_contact(user_id)
+            return ContactServices.list_contacts(user_id)
 
         return check_token
 

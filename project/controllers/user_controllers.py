@@ -10,26 +10,26 @@ class UserControllers:
     def retrieve_user(id: str) -> list[dict]:
         check_token = verify_token_middleware()
 
-        if check_token is not None:
-            return check_token
+        if check_token[0] is True:
+            return UserServices.retrieve_user(id)
 
-        return UserServices.retrieve_user(id)
+        return check_token
 
     def update_user(id: str) -> dict:
         check_token = verify_token_middleware()
 
-        if check_token is not None:
-            return check_token
+        if check_token[0] is True:
+            return UserServices.update_user(id, request.get_json())
 
-        return UserServices.update_user(id, request.get_json())
+        return check_token
 
     def delete_user(id: str) -> None:
         check_token = verify_token_middleware()
 
-        if check_token is not None:
-            return check_token
+        if check_token[0] is True:
+            return UserServices.delete_user(id)
 
-        return UserServices.delete_user(id)
+        return check_token
 
     def user_login():
         return session(request.get_json())
